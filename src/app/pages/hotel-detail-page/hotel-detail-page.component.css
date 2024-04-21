@@ -1,0 +1,87 @@
+
+.heading-info{
+    position: relative;
+}
+
+h2.dacing-script{
+    color: var(--main-color);
+    font-size: 45px;
+    font-weight: 600;
+    margin: 0;
+}
+
+.pitch-heading{
+    width: 350px;
+    font-size: 45px;
+    font-weight: bold;
+}
+
+.pitch-text{
+    font-size: 15px;
+    font-weight: 500;
+    margin-bottom: 30px;
+    width: 261px;
+    
+}
+
+.hovering-bar{
+    position: absolute;
+    height: 100px;
+    width: calc(100% + 52px);
+    /* right: -51px; */
+    bottom: 30px;
+    background-color: white;
+    /* box-shadow: 0 0 10px 10px rgba(0,0,0,0.07); */
+}
+
+.hovering-bar-date{
+    color: #1C1C1C;
+    font-size: 15px;
+    font-weight: medium;
+}
+
+/* .check-in{
+    display: flex;
+    align-items: center;
+} */
+
+.check-heading img{
+    margin-right: 20px;
+    margin-bottom: 10px;
+}
+
+.input-dates{
+    width: 500px;
+}
+
+.check-date{
+    border: none;
+    width: 120px;
+}
+
+.facilities{
+    padding: 0 100px;
+    padding-top: 60px;
+    text-align: center;
+    background-color: white;
+    height: 100%;
+    width: 100%;
+}
+
+.facilities h3{
+    font-size: 40px;
+    font-weight: 500;
+}
+
+.facilities p{
+    font-size: 15px;
+    font-weight:500;
+}
+
+.facility-cards{
+    width: 100%;
+}
+
+.facility-cards div{
+    margin-bottom: 20px;
+}

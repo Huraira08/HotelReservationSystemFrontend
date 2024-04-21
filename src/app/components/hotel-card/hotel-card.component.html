@@ -1,0 +1,27 @@
+<div class="hotel-card-container">
+    <img src="../../../assets/hotel-card-img.png" width="100%" alt="">
+    <div class="info-text">
+        <div class="hotel-name" nz-flex nzJustify="space-between" nzAlign="center">
+            <h3>{{name}}</h3>
+            <p>Available: Yes</p> <!-- change 'Yes' with variable -->
+        </div>
+        <p class="price">
+            Rs. {{price}} per day
+        </p>
+
+        <nz-divider style="border-color: var(--main-color);margin: 0;"></nz-divider>
+
+        <div class="card-lower" nz-flex nzJustify="space-between" nzAlign="center">
+            <div class="facility-logos" nz-flex nzJustify="space-between">
+                <img src="../../../assets/tv-icon.png" alt="">
+                <img src="../../../assets/shower-icon.png" alt="">
+                <img src="../../../assets/wifi-icon.png" alt="">
+            </div>
+            <app-book-btn
+            [height]="47"
+            [width]="143"
+            [borderRadius]="0"
+            ></app-book-btn>
+        </div>
+    </div>
+</div>

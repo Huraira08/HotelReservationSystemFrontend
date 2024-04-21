@@ -1,1 +1,24 @@
 /* You can add global styles to this file, and also import other style files */
+
+:root{
+    --main-color: #7C6A46;
+    --main-background-color: #FAFAFA;
+}
+
+.dacing-script{
+    font-family: "Dancing Script", cursive;
+    font-style: normal;
+}
+
+.common-text{
+    color: white;
+    font-size: 12px;
+    font-weight: bold;
+}
+
+.container{
+    width: 100%;
+    height: 100%;
+    background-color: var(--main-background-color);
+    padding: 0 100px;
+}

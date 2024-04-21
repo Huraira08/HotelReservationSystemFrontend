@@ -1,0 +1,72 @@
+.header{
+    background-color: #FAFAFA;
+    height: 90px;
+}
+
+.links{
+    width: 500px;
+}
+.selected{
+    color: var(--main-color);
+    font-weight: bold;
+}
+
+.footer{
+    height: 300px;
+    width: 100%;
+    background-color: var(--main-color);
+}
+
+.footer-links{
+    width: 446px;
+}
+
+.review-heading{
+    font-size: 30px;
+    font-weight: bold;
+    color: white;
+}
+
+.footer-text{
+    color: white;
+    font-size: 12px;
+    font-weight: bold;
+    max-width: 277px;
+}
+
+.footer-column-heading{
+    color: white;
+    font-size: 15px;
+    font-weight: bold;
+}
+
+.newsletter{
+    height: 148px;
+}
+
+.newsletter-email-input{
+    position: relative;
+    display: inline-block;
+}
+
+.newsletter-email-input input{
+    width: 300px;
+    height: 40px;
+    border: none;
+    outline: none;
+    border-radius: 5px;
+    padding: 18px;
+}
+
+.newsletter-button{
+    position: absolute;
+    top: 6%;
+    right: 1%;
+    height: 35px;
+    width: 80px;
+    border: none;
+    border-radius: 2.5px;
+    background-color: var(--main-color);
+    color: white;
+    cursor: pointer;
+}

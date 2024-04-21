@@ -1,0 +1,24 @@
+<div class="container">
+    <div class="home-img-container">
+        <img src="../../../assets/home-img.png" width="100%" alt="" style="filter:opacity(0.6)">
+        <div class="img-text-container" nz-flex [nzVertical]="true" nzAlign="center">
+            <h1>Rooms and Suites</h1>
+            <p class="common-text">The elegant luxury bedrooms in this gallery showcase custom interior 
+            designs & decorating ideas. View pictures and find your
+             perfect luxury bedroom design.</p>
+             <div class="scroll-down-btn">
+                <img src="../../../assets/scroll-down.png" alt="">
+             </div>
+        </div>
+    </div>
+
+    <div class="hotels" nz-row nzJustify="space-between">
+        <div *ngFor="let hotel of hotels" nz-col nzLg="7">
+            <app-hotel-card
+            [name]="hotel.name"
+            [price]="hotel.rentPerDay"
+            (click)="navToHotelDetail()"
+            ></app-hotel-card>
+        </div>
+    </div>
+</div>

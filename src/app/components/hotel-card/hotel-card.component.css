@@ -1,0 +1,43 @@
+.hotel-card-container{
+    height: 414px;
+    width: 350px;
+    box-shadow: 0 0px 10px 10px rgba(0, 0, 0, 0.04);
+    cursor: pointer;
+}
+
+.info-text{
+    margin-top: 12px;
+    padding: 0 15px;
+}
+
+.hotel-name h3{
+    color: var(--main-color);
+    font-size: 25px;
+    font-weight:600;
+    margin: 0;
+}
+
+.hotel-name p{
+    color: var(--main-color);
+    font-size: 12px;
+}
+
+.price{
+    color: var(--main-color);
+    font-size: 20px;
+    font-weight:500;
+}
+
+.card-lower{
+    margin-top: 11px;
+    padding: 0 12px;
+}
+
+.facility-logos{
+    width: 130px;
+}
+
+.facility-logos img{
+    width: 32px;
+    height: 32px;
+}

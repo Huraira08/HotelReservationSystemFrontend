@@ -1,0 +1,61 @@
+<div class="container">
+    <div class="heading-info" nz-row nzJustify="space-between">
+        <div class="left-content" nz-col nzLg="12">
+            <h2 class="dacing-script">
+                Paradise View
+            </h2>
+            <h3 class="pitch-heading">Hotel for every 
+                moment rich in
+                emotion</h3>
+            <p class="pitch-text">Every moment feels like the first time
+                in paradise view</p>
+            <app-book-btn
+            [width]="165"
+            [height]="55"
+            [borderRadius]="50"
+            ></app-book-btn>
+        </div>
+        <div class="right-content" nz-col nzLg="12">
+            <img src="../../../assets/hotel-detail-img.png" alt="">
+        </div>
+        <div class="hovering-bar" nz-flex nzJustify="space-between" nzAlign="center">
+            <div class="input-dates" nz-flex nzJustify="space-between">
+                <div class="check-date" >
+                    <div class="check-heading" nz-flex nzAlign="center">
+                        <img src="../../../assets/date-picker-icon.png" alt="">
+                        <h5 class="hovering-bar-date">Check in</h5>
+                    </div>
+                    <nz-date-picker class="check-date" [(ngModel)]="checkInDate"></nz-date-picker>
+                </div>
+    
+                <div class="check-date" >
+                    <div class="check-heading" nz-flex nzAlign="center">
+                        <img src="../../../assets/date-picker-icon.png" alt="">
+                        <h5 class="hovering-bar-date">Check in</h5>
+                    </div>
+                    <nz-date-picker class="check-date" [(ngModel)]="checkOutDate"></nz-date-picker>
+                </div>
+            </div>
+
+            <app-book-btn
+            [width]="185"
+            [height]="65"
+            [borderRadius]="5"
+            ></app-book-btn>
+        </div>
+    </div>
+</div>
+
+<div class="facilities">
+    <h3>Our Facilities</h3>
+    <p>We offer modern (5 star) hotel facilities for your comfort.</p>
+
+    <div class="facility-cards" nz-row nzJustify="space-between">
+        <div nz-col nzLg="6" *ngFor="let faclity of facilities">
+            <app-facility-card
+            [facilityName]="faclity.facilityName"
+            [logoPath]="faclity.logoPath"
+            ></app-facility-card>
+        </div>
+    </div>
+</div>
