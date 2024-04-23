@@ -44,9 +44,10 @@ export class AuthService {
       const roleData = localStorage.getItem(this.ROLE_KEY);
       const role = JSON.parse(roleData!);
       console.log(role)
-      if(role === '1') return true;
+      return role === 1;
+      // if(role === '1') return true;
 
-      return false;
+      // return false;
       // return this.isAuthenticated
       // if(token){
       //   const decodeToken = this.jtwHelper.decodeToken(token);
@@ -72,11 +73,13 @@ export class AuthService {
   logout(){
     localStorage.removeItem(this.TOKEN_KEY);
     localStorage.removeItem(this.USER_KEY);
+    localStorage.removeItem(this.ROLE_KEY);
     this.isUserLoggedIn = false;
     this.isUserLoggedInSubject.next(this.isUserLoggedIn);
   }
 
   setToken(token: string, user: User){
+    console.log("login user: ",user)
     localStorage.setItem(this.TOKEN_KEY, token);
     localStorage.setItem(this.USER_KEY, JSON.stringify(user));
     localStorage.setItem(this.ROLE_KEY, user.role.toString())
@@ -97,11 +100,12 @@ export class AuthService {
 
   getUser(){
     const userData = localStorage.getItem(this.USER_KEY)
+    // console.log(userData)
     if(userData){
       const user = JSON.parse(userData);
       // console.log(user);
       // console.log(localStorage.getItem(this.USER_KEY)!)
-      return this.user;
+      return user;
     }
     return undefined;
   }

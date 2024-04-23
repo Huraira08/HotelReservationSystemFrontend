@@ -1,0 +1,11 @@
+.btn-container{
+    margin-top: 10px;
+    width: 100%;
+    display: flex;
+    justify-content:end;
+}
+
+.btn-container button{
+    width: 100px;
+    height: 40px;
+}

@@ -17,4 +17,11 @@ export class HotelsService {
     ))
     return promise;
   }
+
+  getFreeRooms(hotelId: string, bookingId: string){
+    let promise = firstValueFrom(this.http.get<number[]>(
+      `${environment.apiPath}/${this.hotelUrlText}/freeRooms/${hotelId}/${bookingId}`
+    ))
+    return promise;
+  }
 }

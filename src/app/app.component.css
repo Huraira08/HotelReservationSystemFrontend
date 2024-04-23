@@ -11,6 +11,10 @@
     font-weight: bold;
 }
 
+.unselected{
+    color: black;
+}
+
 .footer{
     height: 300px;
     width: 100%;

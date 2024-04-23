@@ -3,15 +3,30 @@
     <div class="logo flex-item"><img src="../assets/logo.png" alt=""></div>
 
     <div class="links flex-item" nz-flex nzJustify="space-between">
-      <a nz-button nzType="link" routerLink="/home" [ngClass]="(router.url === '/home' || router.url === '/hotel-detail')? 'selected':''">Home</a> 
+      <a nz-button nzType="link" href="/home" [ngClass]="(router.url === '/home' || router.url === '/hotel-detail')? 'selected':'unselected'">Home</a> 
       <a nz-button nzType="link" href="#" disabled>About</a>
       <a nz-button nzType="link" href="#" disabled>Contact</a>
+      <a *ngIf="isAdmin" nz-button nzType="link" href="/admin" [ngClass]="(router.url === '/admin' || router.url === '/hotel-detail')? 'selected':'unselected'">Admin</a>
     </div>
     
     <div class="user-buttons flex-item" nz-flex nzAlign="center">
       <!-- <app-book-btn></app-book-btn> -->
-      <button nz-button nzType="link" (click)="navToMyBooking()">My Bookings</button>
-      <button class="login-btn">Login</button>
+      <div *ngIf="user;else loginBtn">
+        Welcome
+        <a nz-button nzType="primary" nz-dropdown [nzDropdownMenu]="menu">
+          {{user.name}}
+          <span nz-icon nzType="down"></span>
+        </a>
+        <nz-dropdown-menu #menu="nzDropdownMenu">
+          <ul nz-menu nzSelectable>
+            <button nz-button nzType="link" (click)="navToMyBooking()" class="unselected">My Bookings</button>
+            <li nz-menu-item><a (click)="logout()">Logout</a></li>
+          </ul>
+        </nz-dropdown-menu>
+      </div>
+      <ng-template #loginBtn>
+        <a href="/login" class="login-btn">Login</a>
+      </ng-template>
     </div>
   </nz-header>
 

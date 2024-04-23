@@ -11,6 +11,8 @@ import { Hotel } from '../../models/hotel';
 import { BookingRequest } from '../../models/booking-request';
 import { BookingStatus } from '../../models/booking-status';
 import { BookingService } from '../../services/booking/booking.service';
+import { AuthService } from '../../services/auth/auth.service';
+import { NzNotificationService } from 'ng-zorro-antd/notification';
 
 @Component({
   selector: 'app-hotel-detail-page',
@@ -65,12 +67,17 @@ export class HotelDetailPageComponent {
     }
   ]
   hotel!: Hotel
-  constructor(private router: Router, private bookingService: BookingService){
+  constructor(private router: Router, 
+    private bookingService: BookingService,
+    private authService: AuthService,
+    private notification: NzNotificationService
+  ){
     this.hotel = this.router.getCurrentNavigation()!.extras!.state!['hotel']
-    console.log(this.hotel)
+    // console.log(this.hotel)
   }
 
   async submitBooking(){
+    console.log(this.authService.getUser())
     const bookingRequest: BookingRequest = {
       id: '',
       checkInDate: this.checkInDate,
@@ -78,11 +85,19 @@ export class HotelDetailPageComponent {
       totalRent: 100,
       bookingStatus: BookingStatus.Pending,
       hotelId: this.hotel.id,
-      userId: 'E2067BCA-292C-4EAB-A9DE-A4FDEB1F9BC0'
+      userId: this.authService.getUser().id
     }
-
+console.log(this.hotel)
     console.log(bookingRequest);
     const rowsAffected:number = await this.bookingService.createBooking(bookingRequest)
+    if(rowsAffected === 1){
+      this.notification.create(
+        'success',
+        'Success',
+        'Your booking request has been submitted successfully',
+      )
+      this.router.navigate(['/home'])
+    }
     console.log(rowsAffected)
     // const bookingList = await this.bookingService.getAll();
     // console.log(bookingList);

@@ -1,1 +1,46 @@
-<p>admin-page works!</p>
+<nz-table 
+[nzData]="requests"
+nzShowSizeChanger
+[nzPageSize]="6"
+(nzCurrentPageDataChange)="onCurrentPageDataChange($event)">
+    <thead>
+      <tr>
+        <th>Id</th>
+        <th>Hotel Name</th>
+        <th>Total Rent</th>
+        <th>CheckIn</th>
+        <th>CheckOut</th>
+        <td>Status</td>
+        <th>Room no.</th>
+        <th>Actions</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let request of currentPageRequests">
+        <td>{{ truncateText(request.id) }}</td>
+        <td>{{ request.hotel?.name }}</td>
+        <td>{{ request.totalRent }}</td>
+        <td>{{ getDate(request.checkInDate) }}</td>
+        <td>{{ getDate(request.checkOutDate) }}</td>
+        <td>{{ numberToStatus(request.bookingStatus) }}</td>
+        <td>N/A</td>
+        <td>
+            <div *ngIf="request.bookingStatus === 0;else notPending">
+                <a (click)="approve(request.id, request.hotelId)">Approve</a>
+                <nz-divider nzType="vertical"></nz-divider>
+                <a nz-popconfirm
+                nzPopconfirmTitle="Are you sure delete this task?"
+                nzPopconfirmPlacement="bottom"
+                (nzOnConfirm)="reject(request.id)"
+                (nzOnCancel)="null" >Reject</a>
+            </div>
+            <ng-template #notPending>
+                <div *ngIf="request.bookingStatus === 1"></div>
+                <div *ngIf="request.bookingStatus === 2 ">
+                    <p class="rejected">Rejected</p>
+                </div>
+            </ng-template>
+        </td>
+      </tr>
+    </tbody>
+  </nz-table>

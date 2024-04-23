@@ -28,7 +28,7 @@ export class BookingService {
   }
 
   getByUserId(userId: string){
-    let promise = firstValueFrom(this.http.get<BookingRequest>(
+    let promise = firstValueFrom(this.http.get<BookingRequest[]>(
       `${environment.apiPath}/${this.bookingUrlText}/UserRequests/${userId}`
       )
     )
@@ -39,6 +39,14 @@ export class BookingService {
     let promise = firstValueFrom(this.http.post<number>(
       `${environment.apiPath}/${this.bookingUrlText}`,
       bookingRequest
+      ))
+    return promise;
+  }
+
+  allocateRoom(bookingId: string, roomNo: number){
+    // `https://localhost:7271/api/BookingRequest/allocate/bookingId/roomNo`
+    let promise = firstValueFrom(this.http.post<number>(
+      `https://localhost:7271/api/BookingRequest/allocate/${bookingId}/${roomNo}`,{}
       ))
     return promise;
   }

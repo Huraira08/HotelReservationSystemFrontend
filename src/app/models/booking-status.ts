@@ -1,10 +1,10 @@
 export enum BookingStatus{
-    Pending = "Pending",
-    Approved = "Approved",
-    Rejected = "Rejected"
+    Pending,
+    Approved,
+    Rejected
 }
 
-function genderToNumber(gender: BookingStatus): number | null {
+export function StatusToNumber(gender: BookingStatus): number | null {
     switch (gender) {
       case BookingStatus.Pending:
         return 0;
@@ -15,4 +15,17 @@ function genderToNumber(gender: BookingStatus): number | null {
       default:
         return null;
     }
+}
+
+export function numberToStatus(num: number): string | null {
+  switch (num) {
+    case 0:
+      return "Pending";
+    case 1:
+      return "Approved";
+    case 2:
+      return "Rejected";
+    default:
+      return null;
+  }
 }

@@ -1,12 +1,18 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { Router, RouterOutlet } from '@angular/router';
 import { NzLayoutModule } from 'ng-zorro-antd/layout';
 import { NzFlexModule } from 'ng-zorro-antd/flex';
 import { NzButtonModule } from 'ng-zorro-antd/button';
+import { NzDropDownModule } from 'ng-zorro-antd/dropdown';
+
 import { CommonModule } from '@angular/common';
 import { BookBtnComponent } from './components/book-btn/book-btn.component';
 import { LoginPageComponent } from './pages/login-page/login-page.component';
 import { RegisterPageComponent } from './pages/register-page/register-page.component';
+import { User } from './models/user';
+import { AuthService } from './services/auth/auth.service';
+import { NotifierService } from './services/notifier/notifier.service';
+import { NzNotificationService } from 'ng-zorro-antd/notification';
 
 @Component({
   selector: 'app-root',
@@ -17,14 +23,46 @@ import { RegisterPageComponent } from './pages/register-page/register-page.compo
     NzLayoutModule,
     NzFlexModule,
     NzButtonModule,
-    BookBtnComponent
+    BookBtnComponent,
+    NzDropDownModule
   ],
   templateUrl: './app.component.html',
   styleUrl: './app.component.css'
 })
-export class AppComponent {
+export class AppComponent implements OnInit{
   showNavbar:boolean = false;
-  constructor(public router: Router){}
+  isLoggedIn!: boolean;
+  isAdmin!: boolean;
+  user?: User;
+  constructor(public router: Router,
+    private authService: AuthService,
+    private notifier: NotifierService,
+    private notificationService: NzNotificationService
+  ){}
+  ngOnInit(): void {
+    this.notifier.startConnection().subscribe(()=>{
+      this.notifier.receiveMessage().subscribe(message=>{
+        console.log(message);
+        if(message == 1){
+          this.notificationService.create('success','Booking Approved','Your booking has been approved')
+        }else{
+          this.notificationService.create('error','Booking Rejected','Your booking has been rejected')
+        }
+      })
+    })
+    this.authService.isLoggedIn().subscribe(
+      {
+        next:(isLoggedIn)=>{
+          this.isLoggedIn = isLoggedIn;
+          if(this.isLoggedIn){
+            this.user = this.authService.getUser();
+            this.isAdmin = this.authService.isAdmin();
+            console.log(`isAdmin: ${this.isAdmin}`)
+          }
+        },
+      }
+    )
+  }
 
   toggleNavbar(component: Component){
     if(component instanceof LoginPageComponent || component instanceof RegisterPageComponent){
@@ -36,5 +74,10 @@ export class AppComponent {
 
   navToMyBooking(){
     this.router.navigate(['/my-bookings'])
+  }
+
+  logout(){
+    this.authService.logout()
+    this.router.navigate(['/login']);
   }
 }
