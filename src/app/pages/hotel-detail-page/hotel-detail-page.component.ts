@@ -6,6 +6,11 @@ import { NzDatePickerModule } from 'ng-zorro-antd/date-picker';
 import { FormsModule } from '@angular/forms';
 import { FacilityCardComponent } from '../../components/facility-card/facility-card.component';
 import { CommonModule } from '@angular/common';
+import { Router } from '@angular/router';
+import { Hotel } from '../../models/hotel';
+import { BookingRequest } from '../../models/booking-request';
+import { BookingStatus } from '../../models/booking-status';
+import { BookingService } from '../../services/booking/booking.service';
 
 @Component({
   selector: 'app-hotel-detail-page',
@@ -25,7 +30,6 @@ import { CommonModule } from '@angular/common';
 export class HotelDetailPageComponent {
   checkInDate = new Date();
   checkOutDate = new Date();
-
   facilities = [
     {
       facilityName: 'Swimming Pool',
@@ -60,4 +64,27 @@ export class HotelDetailPageComponent {
       logoPath: '../../../assets/parking-logo.png'
     }
   ]
+  hotel!: Hotel
+  constructor(private router: Router, private bookingService: BookingService){
+    this.hotel = this.router.getCurrentNavigation()!.extras!.state!['hotel']
+    console.log(this.hotel)
+  }
+
+  async submitBooking(){
+    const bookingRequest: BookingRequest = {
+      id: '',
+      checkInDate: this.checkInDate,
+      checkOutDate: this.checkOutDate,
+      totalRent: 100,
+      bookingStatus: BookingStatus.Pending,
+      hotelId: this.hotel.id,
+      userId: 'E2067BCA-292C-4EAB-A9DE-A4FDEB1F9BC0'
+    }
+
+    console.log(bookingRequest);
+    const rowsAffected:number = await this.bookingService.createBooking(bookingRequest)
+    console.log(rowsAffected)
+    // const bookingList = await this.bookingService.getAll();
+    // console.log(bookingList);
+  }
 }

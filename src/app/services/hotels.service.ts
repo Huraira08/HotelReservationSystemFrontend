@@ -8,12 +8,12 @@ import { environment } from '../environments/environment';
   providedIn: 'root'
 })
 export class HotelsService {
-
+  hotelUrlText = 'hotels';
   constructor(private http: HttpClient){}
 
   getAll(){
     let promise = firstValueFrom(this.http.get<Hotel[]>(
-      `${environment.apiPath}/hotels`
+      `${environment.apiPath}/${this.hotelUrlText}`
     ))
     return promise;
   }

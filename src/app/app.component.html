@@ -1,23 +1,25 @@
 <nz-layout>
-  <nz-header class="header" nz-flex nzJustify='space-between' nzAlign="center">
+  <nz-header *ngIf="showNavbar" class="header" nz-flex nzJustify='space-between' nzAlign="center">
     <div class="logo flex-item"><img src="../assets/logo.png" alt=""></div>
 
     <div class="links flex-item" nz-flex nzJustify="space-between">
-      <a nz-button nzType="link" routerLink="/home" [ngClass]="(router.url === '/home'||router.url === '/hotel-detail')? 'selected':''">Home</a> 
+      <a nz-button nzType="link" routerLink="/home" [ngClass]="(router.url === '/home' || router.url === '/hotel-detail')? 'selected':''">Home</a> 
       <a nz-button nzType="link" href="#" disabled>About</a>
       <a nz-button nzType="link" href="#" disabled>Contact</a>
     </div>
     
-    <div class="user-buttons flex-item">
-      <app-book-btn></app-book-btn>
+    <div class="user-buttons flex-item" nz-flex nzAlign="center">
+      <!-- <app-book-btn></app-book-btn> -->
+      <button nz-button nzType="link" (click)="navToMyBooking()">My Bookings</button>
+      <button class="login-btn">Login</button>
     </div>
   </nz-header>
 
   <nz-content>
-    <router-outlet></router-outlet>
+    <router-outlet (activate)="toggleNavbar($event)"></router-outlet>
   </nz-content>
 
-  <nz-footer class="footer" nz-flex nzJustify="space-between" nzAlign="center">
+  <nz-footer *ngIf="showNavbar" class="footer" nz-flex nzJustify="space-between" nzAlign="center">
     
     <div class="review">
       <div class="review-heading dacing-script">

@@ -37,11 +37,13 @@
                 </div>
             </div>
 
-            <app-book-btn
-            [width]="185"
-            [height]="65"
-            [borderRadius]="5"
-            ></app-book-btn>
+            <div (click)="submitBooking()">
+                <app-book-btn
+                [width]="185"
+                [height]="65"
+                [borderRadius]="5"
+                ></app-book-btn>
+            </div>
         </div>
     </div>
 </div>

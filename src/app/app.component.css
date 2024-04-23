@@ -70,3 +70,19 @@
     color: white;
     cursor: pointer;
 }
+
+.login-btn{
+    cursor:pointer;
+    height: 45px;
+    width: 125px;
+    background-color: var(--main-color);
+    color: white;
+    border:none;
+    border-radius: 5px;
+    padding:0;
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    font-size:15px;
+    font-weight:medium;
+}

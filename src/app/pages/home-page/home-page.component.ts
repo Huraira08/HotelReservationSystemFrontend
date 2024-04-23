@@ -32,7 +32,13 @@ constructor(
     .catch(err => console.log(err))
   }
 
-  navToHotelDetail(){
-    this.router.navigate(['/hotel-detail'])
+  navToHotelDetail(hotel: Hotel){
+    this.router.navigate(['/hotel-detail'], 
+      {
+        state: {
+          hotel: hotel
+        }
+      }
+    )
   }
 }

@@ -1,0 +1,59 @@
+<div class="auth-form-page" nz-flex [nzVertical]="true" nzJustify="center" nzAlign="center">
+    <div class="auth-form-container" nz-flex nzJustify="center" nzAlign="center">
+        <form nz-form [formGroup]="registerForm" class="login-form" (ngSubmit)="submitForm()" nz-flex [nzVertical]="true">
+            <h1>Register</h1>
+            <h2>to get started</h2>
+            <div nz-row nzJustify="space-between">
+                <nz-form-item nz-col nzLg="10">
+                    <nz-form-control nzErrorTip="Please input your name!">
+                    <nz-input-group nzPrefixIcon="user">
+                        <input type="text" nz-input formControlName="name" placeholder="Name" />
+                    </nz-input-group>
+                    </nz-form-control>
+                </nz-form-item>
+                <nz-form-item nz-col nzLg="10">
+                <nz-form-control nzErrorTip="Please input your email!">
+                    <nz-input-group nzPrefixIcon="mail">
+                    <input type="text" nz-input formControlName="email" placeholder="Email" />
+                    </nz-input-group>
+                </nz-form-control>
+                </nz-form-item>
+                <nz-form-item nz-col nzLg="10">
+                <nz-form-control nzErrorTip="Please input your Password!">
+                    <nz-input-group nzPrefixIcon="lock">
+                    <input type="password" nz-input formControlName="password" placeholder="Password" />
+                    </nz-input-group>
+                </nz-form-control>
+                </nz-form-item>
+                <nz-form-item nz-col nzLg="10">
+                    <nz-form-control nzErrorTip="Please confirm your Password!">
+                    <nz-input-group nzPrefixIcon="lock">
+                        <input type="password" nz-input formControlName="confirmPassword" placeholder="Confirm Password" />
+                    </nz-input-group>
+                    </nz-form-control>
+                </nz-form-item>
+                <nz-form-item nz-col nzLg="10">
+                    <nz-form-control nzErrorTip="Please input your name!">
+                    <nz-input-group nzPrefixIcon="number">
+                        <input type="number" nz-input formControlName="age" placeholder="Age" />
+                    </nz-input-group>
+                    </nz-form-control>
+                </nz-form-item>
+                <nz-select nz-col nzLg="10" formControlName="gender" class="select-box" nzPlaceHolder="Gender">
+                        <nz-option *ngFor="let genderLabel of getGenderLabels; let i = index"
+                         [nzValue]="i" [nzLabel]="genderLabel"></nz-option>
+                </nz-select>
+                <nz-form-item nz-col nzLg="10">
+                    <nz-form-control nzErrorTip="Please input your cnic!">
+                    <nz-input-group nzPrefixIcon="number">
+                        <input type="text" nz-input formControlName="cnic" placeholder="xxxxx-xxxxxxxx-x" />
+                    </nz-input-group>
+                    </nz-form-control>
+                </nz-form-item>
+                <div nz-col nzLg="14"></div>
+                <button nz-col nzLg="10" nz-button class="login-form-button login-form-margin" [nzType]="'primary'">Sign up</button>
+            </div>
+            <div>Or <a href="/login">login now!</a></div>
+          </form>
+    </div>
+</div>

@@ -1,0 +1,47 @@
+.auth-form-page{
+    height: 100%;
+    width: 100vw;
+    background-color: #FAFAFA;
+    padding: 70px;
+}
+
+.auth-form-container{
+    height: 100%;
+    width: 100%;
+    background-color: white;
+    border-radius: 26px;
+    margin: 0 auto;
+    padding: 30px 100px;
+    /* padding-left: 100px;
+    padding-right: 100px; */
+    box-shadow: 0 0 10px 1px rgba(0,0,0,0.05);
+}
+
+.auth-form-page h1{
+    font-size: 35px;
+    font-weight: 600;
+    margin-bottom: 0;
+}
+
+.auth-form-page h2{
+    font-size: 25px;
+    font-weight: 300;
+}
+
+.input-group{
+    width: 350px;
+}
+
+form input{
+    width: 100%;
+    height: 30px;
+    border-radius: 10px!important;
+}
+
+.select-box{
+    margin-bottom: 25px;
+}
+
+form button{
+    margin-bottom: 10px;
+}
