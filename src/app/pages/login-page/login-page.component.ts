@@ -33,6 +33,7 @@ import { CommonModule } from '@angular/common';
 })
 export class LoginPageComponent {
   loginForm!: FormGroup
+  errorMessage = ''
 
   loggingIn: boolean = false
 
@@ -60,6 +61,7 @@ export class LoginPageComponent {
       this.router.navigate(['/home'])
       }catch(e){
         this.loggingIn = false;
+        this.errorMessage = 'Invalid Credentails.';
         console.log(e)
       }
     }else{
