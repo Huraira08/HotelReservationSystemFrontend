@@ -17,7 +17,12 @@
                 </nz-input-group>
               </nz-form-control>
             </nz-form-item>
-            <button nz-button class="login-form-button login-form-margin" [nzType]="'primary'">Log in</button>
+            <div nz-flex>
+              <nz-spin *ngIf="loggingIn" style="margin-right: 10px;" nzSimple></nz-spin>
+              <button nz-button class="login-form-button login-form-margin" [nzType]="'primary'">
+                Log in
+              </button>
+            </div>
             <div>Or <a href="/register">register now!</a></div>
           </form>
     </div>

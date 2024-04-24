@@ -6,13 +6,14 @@ import { RegisterPageComponent } from './pages/register-page/register-page.compo
 import { authGuard } from './guards/auth.guard';
 import { MyBookingsPageComponent } from './pages/my-bookings-page/my-bookings-page.component';
 import { AdminPageComponent } from './pages/admin-page/admin-page.component';
+import { nonAuthGuard } from './guards/non-auth.guard';
 
 export const routes: Routes = [
     {path: '', redirectTo: "home", pathMatch: 'full'},
     {path: 'home', component: HomePageComponent}, // accessible without login
     {path: 'hotel-detail', component: HotelDetailPageComponent, canActivate: [authGuard]},
-    {path: 'login', component: LoginPageComponent},
-    {path: 'register', component: RegisterPageComponent},
+    {path: 'login', component: LoginPageComponent, canActivate: [nonAuthGuard]},
+    {path: 'register', component: RegisterPageComponent, canActivate: [nonAuthGuard]},
     {path: 'my-bookings', component: MyBookingsPageComponent, canActivate: [authGuard]},
     {path: 'admin', component: AdminPageComponent, canActivate: [authGuard]}
 ];

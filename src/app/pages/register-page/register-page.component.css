@@ -44,4 +44,16 @@ form input{
 
 form button{
     margin-bottom: 10px;
+    width: 100%;
 }
+
+.error-message {
+    color: #f5222d;
+    background-color: #fff1f0;
+    padding: 8px;
+    margin-top: 8px;
+    border: 1px solid #ff4d4f;
+    border-radius: 4px;
+    margin-bottom: 15px;
+  }
+  

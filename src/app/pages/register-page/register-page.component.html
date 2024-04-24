@@ -3,6 +3,7 @@
         <form nz-form [formGroup]="registerForm" class="login-form" (ngSubmit)="submitForm()" nz-flex [nzVertical]="true">
             <h1>Register</h1>
             <h2>to get started</h2>
+            <div *ngIf="errorMessage" class="error-message">{{ errorMessage }}</div>
             <div nz-row nzJustify="space-between">
                 <nz-form-item nz-col nzLg="10">
                     <nz-form-control nzErrorTip="Please input your name!">
@@ -46,12 +47,16 @@
                 <nz-form-item nz-col nzLg="10">
                     <nz-form-control nzErrorTip="Please input your cnic!">
                     <nz-input-group nzPrefixIcon="number">
-                        <input type="text" nz-input formControlName="cnic" placeholder="xxxxx-xxxxxxxx-x" />
+                        <input type="text" nz-input formControlName="cnic" placeholder="CNIC" />
                     </nz-input-group>
                     </nz-form-control>
                 </nz-form-item>
+                
                 <div nz-col nzLg="14"></div>
-                <button nz-col nzLg="10" nz-button class="login-form-button login-form-margin" [nzType]="'primary'">Sign up</button>
+                <div nz-col nzLg="10" nz-flex>
+                    <nz-spin *ngIf="signingIn" style="margin-right: 10px;" nzSimple></nz-spin>
+                    <button nz-button class="login-form-button login-form-margin" [nzType]="'primary'">Sign up</button>
+                </div>
             </div>
             <div>Or <a href="/login">login now!</a></div>
           </form>

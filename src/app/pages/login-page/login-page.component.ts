@@ -5,10 +5,13 @@ import { FormGroup, FormControl, Validators, FormBuilder } from '@angular/forms'
 import { NzIconModule } from 'ng-zorro-antd/icon';
 import { NzInputModule } from 'ng-zorro-antd/input';
 import { NzButtonModule } from 'ng-zorro-antd/button';
+import { NzSpinModule } from 'ng-zorro-antd/spin';
+
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { AuthService } from '../../services/auth/auth.service';
 import { User } from '../../models/user';
 import { Router } from '@angular/router';
+import { CommonModule } from '@angular/common';
 
 @Component({
   selector: 'app-login-page',
@@ -19,14 +22,19 @@ import { Router } from '@angular/router';
     NzIconModule,
     NzInputModule,
     NzButtonModule,
+    NzSpinModule,
+
     FormsModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    CommonModule
   ],
   templateUrl: './login-page.component.html',
   styleUrl: './login-page.component.css'
 })
 export class LoginPageComponent {
   loginForm!: FormGroup
+
+  loggingIn: boolean = false
 
   constructor(
     private formBuilder: FormBuilder,
@@ -41,14 +49,17 @@ export class LoginPageComponent {
 
   async submitForm(){
     if(this.loginForm.valid){
+      this.loggingIn = true;
       const email = this.loginForm.value['email']
       const password = this.loginForm.value['password']
       try{
         const response = await this.authService.login(email, password)
       this.authService.setToken(response!.token, response!.user);
       // this.authService.isAdmin();
+      this.loggingIn = false;
       this.router.navigate(['/home'])
       }catch(e){
+        this.loggingIn = false;
         console.log(e)
       }
     }else{

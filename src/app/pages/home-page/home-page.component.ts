@@ -1,4 +1,5 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ElementRef, ViewChild } from '@angular/core';
+
 import { NzFlexModule } from 'ng-zorro-antd/flex';
 import { HotelCardComponent } from '../../components/hotel-card/hotel-card.component';
 import { CommonModule } from '@angular/common';
@@ -21,6 +22,7 @@ import { HotelsService } from '../../services/hotels.service';
 })
 export class HomePageComponent implements OnInit {
 hotels:Hotel[] = []
+@ViewChild('scrollTarget') scrollTarget!: ElementRef;
 
 constructor(
   private router: Router,
@@ -40,5 +42,9 @@ constructor(
         }
       }
     )
+  }
+
+  scrollDown() {
+    this.scrollTarget.nativeElement.scrollIntoView({ behavior: 'smooth' });
   }
 }
