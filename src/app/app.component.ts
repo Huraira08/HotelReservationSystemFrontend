@@ -41,12 +41,12 @@ export class AppComponent implements OnInit{
   ){}
   ngOnInit(): void {
     this.notifier.startConnection().subscribe(()=>{
-      this.notifier.receiveMessage().subscribe(message=>{
-        console.log(message);
-        if(message == 1){
-          this.notificationService.create('success','Booking Approved','Your booking has been approved')
+      this.notifier.receiveMessage().subscribe(request=>{
+        console.log(request, request.Id);
+        if(request.BookingStatus == 1){
+          this.notificationService.create('success','Booking Approved',`Your booking request ${request.Id} has been approved`)
         }else{
-          this.notificationService.create('error','Booking Rejected','Your booking has been rejected')
+          this.notificationService.create('error','Booking Rejected',`Your booking request ${request.Id} has been rejected`)
         }
       })
     })

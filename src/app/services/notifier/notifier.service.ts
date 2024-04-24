@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import * as signalR from '@microsoft/signalr';
 import { Observable } from 'rxjs';
+import { BookingRequest } from '../../models/booking-request';
 
 @Injectable({
   providedIn: 'root'
@@ -29,9 +30,9 @@ export class NotifierService {
     });
   }
 
-  receiveMessage(): Observable<number> {
-    return new Observable<number>((observer) => {
-      this.hubConnection.on('status', (message: number) => {
+  receiveMessage(): Observable<any> {
+    return new Observable<any>((observer) => {
+      this.hubConnection.on('status', (message: any) => {
         observer.next(message);
       });
     });
