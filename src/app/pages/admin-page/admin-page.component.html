@@ -1,5 +1,5 @@
 <nz-table 
-[nzData]="requests"
+[nzData]="requestAllocations"
 nzShowSizeChanger
 [nzPageSize]="6"
 (nzCurrentPageDataChange)="onCurrentPageDataChange($event)">
@@ -16,28 +16,32 @@ nzShowSizeChanger
       </tr>
     </thead>
     <tbody>
-      <tr *ngFor="let request of currentPageRequests">
-        <td>{{ truncateText(request.id) }}</td>
-        <td>{{ request.hotel?.name }}</td>
-        <td>{{ request.totalRent }}</td>
-        <td>{{ getDate(request.checkInDate) }}</td>
-        <td>{{ getDate(request.checkOutDate) }}</td>
-        <td>{{ numberToStatus(request.bookingStatus) }}</td>
-        <td>N/A</td>
+      <tr *ngFor="let requestAllocation of currentPageRequestAllocations">
+        <td>{{ truncateText(requestAllocation.bookingRequest.id) }}</td>
+        <td>{{ requestAllocation.bookingRequest.hotel?.name }}</td>
+        <td>{{ requestAllocation.bookingRequest.totalRent }}</td>
+        <td>{{ getDate(requestAllocation.bookingRequest.checkInDate) }}</td>
+        <td>{{ getDate(requestAllocation.bookingRequest.checkOutDate) }}</td>
+        <td>{{ numberToStatus(requestAllocation.bookingRequest.bookingStatus) }}</td>
+        <td>{{requestAllocation.allocation?.roomNo || "N/A"}}</td>
         <td>
-            <div *ngIf="request.bookingStatus === 0;else notPending">
-                <a (click)="approve(request.id, request.hotelId)">Approve</a>
+            <div *ngIf="requestAllocation.bookingRequest.bookingStatus === 0;else notPending">
+                <a (click)="approve(requestAllocation.bookingRequest.id, requestAllocation.bookingRequest.hotelId)">Approve</a>
                 <nz-divider nzType="vertical"></nz-divider>
                 <a nz-popconfirm
                 nzPopconfirmTitle="Are you sure delete this task?"
                 nzPopconfirmPlacement="bottom"
-                (nzOnConfirm)="reject(request.id)"
+                (nzOnConfirm)="reject(requestAllocation.bookingRequest.id)"
                 (nzOnCancel)="null" >Reject</a>
             </div>
             <ng-template #notPending>
-                <div *ngIf="request.bookingStatus === 1"></div>
-                <div *ngIf="request.bookingStatus === 2 ">
-                    <p class="rejected">Rejected</p>
+                <div *ngIf="requestAllocation.bookingRequest.bookingStatus === 1">
+                  <button nz-button nzType="primary" (click)="showCalendar(requestAllocation.bookingRequest.checkInDate, requestAllocation.bookingRequest.checkOutDate)">
+                    Calendar
+                  </button>
+                </div>
+                <div *ngIf="requestAllocation.bookingRequest.bookingStatus === 2 ">
+                    <p class="rejected"></p>
                 </div>
             </ng-template>
         </td>

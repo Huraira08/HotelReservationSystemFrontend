@@ -1,8 +1,13 @@
 <div class="bookings-container">
     <h1>Bookings</h1>
-    <div *ngFor="let request of requests" style="margin-bottom:10px ;">
-        <app-booking-card
-        [request]="request"
-        ></app-booking-card>
+    <div *ngIf="requests.length > 0; else noBookings">
+        <div *ngFor="let request of requests" style="margin-bottom:10px ;">
+            <app-booking-card
+            [request]="request"
+            ></app-booking-card>
+        </div>
     </div>
+    <ng-template #noBookings>
+        <h2 style="margin:100px;">You don't have any booking requests currently</h2>
+    </ng-template>
 </div>

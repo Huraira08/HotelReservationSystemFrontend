@@ -10,6 +10,9 @@ import { NzModalModule, NzModalService } from 'ng-zorro-antd/modal';
 
 import { numberToStatus } from '../../models/booking-status';
 import { ApproveRequestModalComponent } from '../../components/approve-request-modal/approve-request-modal.component';
+import { RequestAndAllocation } from '../../models/request-and-allocation';
+import { NzButtonModule } from 'ng-zorro-antd/button';
+import { CalendarComponent } from '../../components/calendar/calendar.component';
 
 @Component({
   selector: 'app-admin-page',
@@ -19,6 +22,8 @@ import { ApproveRequestModalComponent } from '../../components/approve-request-m
     NzTableModule,
     NzPopconfirmModule,
     NzModalModule,
+    NzButtonModule,
+
     CommonModule
   ],
   templateUrl: './admin-page.component.html',
@@ -26,6 +31,8 @@ import { ApproveRequestModalComponent } from '../../components/approve-request-m
 })
 export class AdminPageComponent {
   requests: BookingRequest[] = [];
+  currentPageRequestAllocations: readonly RequestAndAllocation[] = []
+  requestAllocations: RequestAndAllocation[] = [];
   currentPageRequests: readonly BookingRequest[] = []
 
   constructor(
@@ -41,6 +48,10 @@ export class AdminPageComponent {
   fetchBookings(){
     this.bookingService.getAll()
      .then(requests => {this.requests = requests})
+     .catch(err => console.log(err));
+
+     this.bookingService.getRequestAllocations()
+     .then(requestAllocations => this.requestAllocations = requestAllocations)
      .catch(err => console.log(err));
   }
 
@@ -66,12 +77,32 @@ export class AdminPageComponent {
     })
   }
 
-  reject(id: string){
-    console.log('reject :', id)
+  reject(bookingId: string){
+    console.log('reject :', bookingId)
+    this.bookingService.reject(bookingId)
+    .then(rows=>{console.log(rows); this.fetchBookings()})
+    .catch(err=>console.log(err))
   }
 
-  onCurrentPageDataChange($event: readonly BookingRequest[]){
-    this.currentPageRequests = $event;
+  onCurrentPageDataChange($event: readonly RequestAndAllocation[]){
+    this.currentPageRequestAllocations = $event;
+  }
+
+  showCalendar(checkin: Date, checkout: Date){
+    console.log(checkin)
+    console.log(checkout)
+    this.modalService.create({
+      nzTitle: 'Calendar',
+      nzContent: CalendarComponent,
+      nzData:{
+        rangeStart: checkin,
+        rangeEnd: checkout
+      },
+      // nzWidth: "100%",
+      nzStyle:{'top': '10px'},
+      // nzOnOk: ()=>{}
+      nzFooter:null
+    })
   }
 
   // Utility functions
