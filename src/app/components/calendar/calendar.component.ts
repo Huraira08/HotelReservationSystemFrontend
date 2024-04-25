@@ -26,9 +26,8 @@ export interface ICalendarModalData{
   <div [ngStyle]="{ width: '300px', border: '1px solid #d9d9d9', borderRadius: '4px' }">
       <nz-calendar 
       [nzFullscreen]="false" 
-      [nzCustomHeader]="customHeader"
       [nzDateFullCell]="customDateCell"
-      [nzValue]="undefined"
+      [nzValue]="modalData.rangeStart"
       >
       
     </nz-calendar>
