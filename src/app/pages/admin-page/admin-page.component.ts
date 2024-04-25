@@ -8,7 +8,7 @@ import { NzDividerComponent } from 'ng-zorro-antd/divider';
 import { NzPopconfirmModule } from 'ng-zorro-antd/popconfirm';
 import { NzModalModule, NzModalService } from 'ng-zorro-antd/modal';
 
-import { numberToStatus } from '../../models/booking-status';
+import { BookingStatus, numberToStatus } from '../../models/booking-status';
 import { ApproveRequestModalComponent } from '../../components/approve-request-modal/approve-request-modal.component';
 import { RequestAndAllocation } from '../../models/request-and-allocation';
 import { NzButtonModule } from 'ng-zorro-antd/button';
@@ -39,42 +39,71 @@ export class AdminPageComponent {
     {
       title: 'Id',
       compare: (a: RequestAndAllocation, b: RequestAndAllocation) => a.bookingRequest.id.localeCompare(b.bookingRequest.id),
-      priority: 1
+      priority: 1,
+      listOfFilter: [],
+      filterFn: null,
+      filterMultiple: true
     },
     {
       title: 'Hotel Name',
       compare: (a: RequestAndAllocation, b: RequestAndAllocation) => a.bookingRequest.hotel!.name.localeCompare(b.bookingRequest.hotel!.name),
-      priority: 2
+      priority: 2,
+      listOfFilter: [],
+      filterFn: null,
+      filterMultiple: true
     },
     {
       title: 'Total Rent',
       compare: (a: RequestAndAllocation, b: RequestAndAllocation) => a.bookingRequest.totalRent - b.bookingRequest.totalRent,
-      priority: 3
+      priority: 3,
+      listOfFilter: [],
+      filterFn: null,
+      filterMultiple: true
     },
     {
       title: 'CheckIn',
       compare: (a: RequestAndAllocation, b: RequestAndAllocation) => a.bookingRequest.checkInDate.getTime() - b.bookingRequest.checkOutDate.getTime(),
-      priority: 4
+      priority: 4,
+      listOfFilter: [],
+      filterFn: null,
+      filterMultiple: true
     },
     {
       title: 'CheckOut',
       compare: (a: RequestAndAllocation, b: RequestAndAllocation) => a.bookingRequest.checkInDate.getTime() - b.bookingRequest.checkOutDate.getTime(),
-      priority: 5
+      priority: 5,
+      listOfFilter: [],
+      filterFn: null,
+      filterMultiple: true
     },
     {
       title: 'Status',
       compare: (a: RequestAndAllocation, b: RequestAndAllocation) => numberToStatus(a.bookingRequest.bookingStatus)!.localeCompare(numberToStatus(b.bookingRequest.bookingStatus)!),
-      priority: 6
+      priority: 6,
+      listOfFilter: [
+        { text: 'Pending', value: BookingStatus.Pending },
+        { text: 'Approved', value: BookingStatus.Approved },
+        { text: 'Rejected', value: BookingStatus.Rejected },
+      ],
+      filterFn: (list: BookingStatus[], item: RequestAndAllocation) => 
+        list.some(status => item.bookingRequest.bookingStatus === status),
+      filterMultiple: true
     },
     {
       title: 'Room no.',
       compare: null,
-      priority: false
+      priority: false,
+      listOfFilter: [],
+      filterFn: null,
+      filterMultiple: true
     },
     {
       title: 'Actions',
       compare: null,
-      priority: false
+      priority: false,
+      listOfFilter: [],
+      filterFn: null,
+      filterMultiple: true
     },
   ];
 

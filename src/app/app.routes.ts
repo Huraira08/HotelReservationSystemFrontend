@@ -11,7 +11,7 @@ import { nonAuthGuard } from './guards/non-auth.guard';
 export const routes: Routes = [
     {path: '', redirectTo: "home", pathMatch: 'full'},
     {path: 'home', component: HomePageComponent}, // accessible without login
-    {path: 'hotel-detail', component: HotelDetailPageComponent, canActivate: [authGuard]},
+    {path: 'hotel-detail', component: HotelDetailPageComponent},
     {path: 'login', component: LoginPageComponent, canActivate: [nonAuthGuard]},
     {path: 'register', component: RegisterPageComponent, canActivate: [nonAuthGuard]},
     {path: 'my-bookings', component: MyBookingsPageComponent, canActivate: [authGuard]},

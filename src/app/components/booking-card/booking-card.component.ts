@@ -12,7 +12,7 @@ import { numberToStatus } from '../../models/booking-status';
   // templateUrl: './booking-card.component.html',
   template:`
   <div class="booking-card-container" nz-flex nzAlign="center">
-    <img src="../../../assets/hotel-card-img.png" height="80" width="95" alt="">
+    <img src="../../../assets/hotel-card-img1.jpg" height="80" width="95" alt="">
     <div class="booking-content" nz-flex nzJustify="space-between">
       <div class="booking-info">
         <div class="info-heading">

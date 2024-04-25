@@ -34,6 +34,7 @@ import { NzSpinModule } from 'ng-zorro-antd/spin';
 export class HotelDetailPageComponent {
   checkInDate = new Date();
   checkOutDate = new Date();
+  isLoggedIn = false;
   error = ''
   isLoading = false;
   facilities = [
@@ -77,10 +78,17 @@ export class HotelDetailPageComponent {
     private notification: NzNotificationService
   ){
     this.hotel = this.router.getCurrentNavigation()!.extras!.state!['hotel']
+    this.authService.isLoggedIn().subscribe({
+      next: isLoggedIn => this.isLoggedIn = isLoggedIn,
+      error: err => console.log(err)
+    })
     // console.log(this.hotel)
   }
 
   async submitBooking(){
+    if(!this.isLoggedIn){
+      this.router.navigate(['/login']);
+    }
     console.log(this.authService.getUser())
     const today = new Date()
     today.setHours(0, 0, 0, 0)
