@@ -13,10 +13,11 @@
     </div>
 
     <div class="hotels" nz-row nzJustify="space-between">
-        <div *ngFor="let hotel of hotels" nz-col nzLg="7">
+        <div *ngFor="let hotel of hotels; let i = index;" nz-col nzLg="7">
             <app-hotel-card
             [name]="hotel.name"
             [price]="hotel.rentPerDay"
+            [imagePath]="'../../../assets/hotel-card-img'+i % 3+'.jpg'"
             (click)="navToHotelDetail(hotel)"
             ></app-hotel-card>
         </div>

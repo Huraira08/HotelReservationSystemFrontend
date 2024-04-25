@@ -17,4 +17,5 @@ import { BookBtnComponent } from '../book-btn/book-btn.component';
 export class HotelCardComponent {
   @Input() name!: string;
   @Input() price!: number;
+  @Input() imagePath!: string;
 }

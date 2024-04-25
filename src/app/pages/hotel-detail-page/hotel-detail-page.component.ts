@@ -13,6 +13,7 @@ import { BookingStatus } from '../../models/booking-status';
 import { BookingService } from '../../services/booking/booking.service';
 import { AuthService } from '../../services/auth/auth.service';
 import { NzNotificationService } from 'ng-zorro-antd/notification';
+import { NzSpinModule } from 'ng-zorro-antd/spin';
 
 @Component({
   selector: 'app-hotel-detail-page',
@@ -24,7 +25,8 @@ import { NzNotificationService } from 'ng-zorro-antd/notification';
     NzGridModule,
     NzFlexModule,
     NzDatePickerModule,
-    FacilityCardComponent
+    FacilityCardComponent,
+    NzSpinModule
   ],
   templateUrl: './hotel-detail-page.component.html',
   styleUrl: './hotel-detail-page.component.css'
@@ -32,6 +34,8 @@ import { NzNotificationService } from 'ng-zorro-antd/notification';
 export class HotelDetailPageComponent {
   checkInDate = new Date();
   checkOutDate = new Date();
+  error = ''
+  isLoading = false;
   facilities = [
     {
       facilityName: 'Swimming Pool',
@@ -78,11 +82,22 @@ export class HotelDetailPageComponent {
 
   async submitBooking(){
     console.log(this.authService.getUser())
+    const today = new Date()
+    today.setHours(0, 0, 0, 0)
+    if(this.checkInDate < today){
+      this.error = 'Check-in date cannot be in the past.';
+      return;
+    }
+    if(this.checkOutDate < this.checkInDate){
+      this.error = 'Check-out date cannot be before check-in date.';
+      return;
+    }
+    this.isLoading = true;
     const bookingRequest: BookingRequest = {
       id: '',
       checkInDate: this.checkInDate,
       checkOutDate: this.checkOutDate,
-      totalRent: 100,
+      totalRent: this.hotel.rentPerDay * (this.differenceInDays(this.checkInDate, this.checkOutDate) + 1),
       bookingStatus: BookingStatus.Pending,
       hotelId: this.hotel.id,
       userId: this.authService.getUser().id
@@ -99,7 +114,18 @@ console.log(this.hotel)
       this.router.navigate(['/home'])
     }
     console.log(rowsAffected)
-    // const bookingList = await this.bookingService.getAll();
-    // console.log(bookingList);
+    this.isLoading = false;
+  }
+
+  differenceInDays(date1: Date, date2: Date): number {
+    // Convert both dates to UTC to ensure accurate calculation
+    const utc1 = Date.UTC(date1.getFullYear(), date1.getMonth(), date1.getDate());
+    const utc2 = Date.UTC(date2.getFullYear(), date2.getMonth(), date2.getDate());
+  
+    // Calculate the difference in milliseconds
+    const diffInMs = Math.abs(utc2 - utc1);
+  
+    // Convert the difference from milliseconds to days
+    return Math.floor(diffInMs / (1000 * 60 * 60 * 24));
   }
 }

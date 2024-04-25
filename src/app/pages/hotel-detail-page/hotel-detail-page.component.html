@@ -37,14 +37,20 @@
                 </div>
             </div>
 
-            <div (click)="submitBooking()">
+            <div (click)="submitBooking()" nz-flex nzAlign="center" style="margin-right: 10px;">
+                <nz-spin *ngIf="isLoading" nzSimple [nzSize]="'large'" style="margin-right: 10px;"></nz-spin>
                 <app-book-btn
                 [width]="185"
                 [height]="65"
                 [borderRadius]="5"
                 ></app-book-btn>
             </div>
+            
         </div>
+        
+        <div *ngIf="error" class="error-message">
+            {{error}}
+          </div>
     </div>
 </div>
 

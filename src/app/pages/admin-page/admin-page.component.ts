@@ -35,6 +35,49 @@ export class AdminPageComponent {
   requestAllocations: RequestAndAllocation[] = [];
   currentPageRequests: readonly BookingRequest[] = []
 
+  listOfColumn = [
+    {
+      title: 'Id',
+      compare: (a: RequestAndAllocation, b: RequestAndAllocation) => a.bookingRequest.id.localeCompare(b.bookingRequest.id),
+      priority: 1
+    },
+    {
+      title: 'Hotel Name',
+      compare: (a: RequestAndAllocation, b: RequestAndAllocation) => a.bookingRequest.hotel!.name.localeCompare(b.bookingRequest.hotel!.name),
+      priority: 2
+    },
+    {
+      title: 'Total Rent',
+      compare: (a: RequestAndAllocation, b: RequestAndAllocation) => a.bookingRequest.totalRent - b.bookingRequest.totalRent,
+      priority: 3
+    },
+    {
+      title: 'CheckIn',
+      compare: (a: RequestAndAllocation, b: RequestAndAllocation) => a.bookingRequest.checkInDate.getTime() - b.bookingRequest.checkOutDate.getTime(),
+      priority: 4
+    },
+    {
+      title: 'CheckOut',
+      compare: (a: RequestAndAllocation, b: RequestAndAllocation) => a.bookingRequest.checkInDate.getTime() - b.bookingRequest.checkOutDate.getTime(),
+      priority: 5
+    },
+    {
+      title: 'Status',
+      compare: (a: RequestAndAllocation, b: RequestAndAllocation) => numberToStatus(a.bookingRequest.bookingStatus)!.localeCompare(numberToStatus(b.bookingRequest.bookingStatus)!),
+      priority: 6
+    },
+    {
+      title: 'Room no.',
+      compare: null,
+      priority: false
+    },
+    {
+      title: 'Actions',
+      compare: null,
+      priority: false
+    },
+  ];
+
   constructor(
     private bookingService: BookingService,
     private modalService: NzModalService

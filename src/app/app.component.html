@@ -3,10 +3,10 @@
     <div class="logo flex-item"><img src="../assets/logo.png" alt=""></div>
 
     <div class="links flex-item" nz-flex nzJustify="space-between">
-      <a nz-button nzType="link" href="/home" [ngClass]="(router.url === '/home' || router.url === '/hotel-detail')? 'selected':'unselected'">Home</a> 
-      <a nz-button nzType="link" href="#" disabled>About</a>
-      <a nz-button nzType="link" href="#" disabled>Contact</a>
-      <a *ngIf="isAdmin" nz-button nzType="link" href="/admin" [ngClass]="(router.url === '/admin' || router.url === '/hotel-detail')? 'selected':'unselected'">Admin</a>
+      <a nz-button nzType="link" routerLink="/home" [ngClass]="(router.url === '/home' || router.url === '/hotel-detail')? 'selected':'unselected'">Home</a> 
+      <a nz-button nzType="link" routerLink="#" disabled>About</a>
+      <a nz-button nzType="link" routerLink="#" disabled>Contact</a>
+      <a *ngIf="isAdmin" nz-button nzType="link" routerLink="/admin" [ngClass]="(router.url === '/admin')? 'selected':'unselected'">Admin</a>
     </div>
     
     <div class="user-buttons flex-item" nz-flex nzAlign="center">

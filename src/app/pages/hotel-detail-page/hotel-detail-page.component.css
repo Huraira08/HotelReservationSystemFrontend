@@ -85,3 +85,12 @@ h2.dacing-script{
 .facility-cards div{
     margin-bottom: 20px;
 }
+
+.error-message {
+    position: absolute;
+    color: red;
+    background-color: transparent;
+    font-size: 16px;
+    margin-top: 5px;
+    bottom: 10px;
+  }

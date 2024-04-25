@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { Router, RouterOutlet } from '@angular/router';
+import { NavigationEnd, Router, RouterLink, RouterOutlet } from '@angular/router';
 import { NzLayoutModule } from 'ng-zorro-antd/layout';
 import { NzFlexModule } from 'ng-zorro-antd/flex';
 import { NzButtonModule } from 'ng-zorro-antd/button';
@@ -13,6 +13,7 @@ import { User } from './models/user';
 import { AuthService } from './services/auth/auth.service';
 import { NotifierService } from './services/notifier/notifier.service';
 import { NzNotificationService } from 'ng-zorro-antd/notification';
+import { filter } from 'rxjs';
 
 @Component({
   selector: 'app-root',
@@ -24,7 +25,8 @@ import { NzNotificationService } from 'ng-zorro-antd/notification';
     NzFlexModule,
     NzButtonModule,
     BookBtnComponent,
-    NzDropDownModule
+    NzDropDownModule,
+    RouterLink
   ],
   templateUrl: './app.component.html',
   styleUrl: './app.component.css'
@@ -38,7 +40,13 @@ export class AppComponent implements OnInit{
     private authService: AuthService,
     private notifier: NotifierService,
     private notificationService: NzNotificationService
-  ){}
+  ){
+    this.router.events.pipe(
+      filter(event => event instanceof NavigationEnd)
+    ).subscribe(() => {
+      window.scrollTo(0, 0); // Scroll to top of the page
+    });
+  }
   ngOnInit(): void {
     this.notifier.startConnection().subscribe(()=>{
       this.notifier.receiveMessage().subscribe(request=>{
