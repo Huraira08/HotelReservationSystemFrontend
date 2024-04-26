@@ -1,6 +1,8 @@
 import { Component, EventEmitter, Inject, inject, Input, OnChanges, OnInit, Output, SimpleChanges } from '@angular/core';
 import { FormArray, FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { NZ_MODAL_DATA, NzModalRef } from 'ng-zorro-antd/modal';
+import { NzSelectModule } from 'ng-zorro-antd/select';
+
 import { BookingService } from '../../services/booking/booking.service';
 import { NzButtonComponent } from 'ng-zorro-antd/button';
 import { HotelsService } from '../../services/hotels.service';
@@ -19,6 +21,7 @@ export interface IApproveModalData{
     CommonModule,
 
     NzButtonComponent,
+    NzSelectModule
   ],
   // templateUrl: './approve-request-modal.component.html',
   template:`
@@ -26,14 +29,10 @@ export interface IApproveModalData{
   <!-- <h1>Assign a room no.</h1> -->
   <form [formGroup]="bookingForm" (ngSubmit)="allocate()">
     <div *ngIf="freeRooms">
-      <label for="roomNo">Room No. </label>
-      <select name="roomNo" id="roomNo"
-      class="form-control" formControlName="roomNo"
-      >
-        <option *ngFor="let roomNo of freeRooms" >
-            {{roomNo}}
-        </option>
-      </select>
+      <nz-select nzShowSearch nzAllowClear nzPlaceHolder="Select a Room" formControlName="roomNo">
+        <nz-option *ngFor="let roomNo of freeRooms" [nzLabel]="'Room no. '+roomNo" [nzValue]="roomNo">
+        </nz-option>
+      </nz-select>
     </div>
   </form>
 
