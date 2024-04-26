@@ -55,7 +55,7 @@ export class BookingService {
     return promise;
   }
 
-  createBooking(bookingRequest: BookingRequest){
+  createBooking(bookingRequest: any){
     let promise = firstValueFrom(this.http.post<number>(
       `${environment.apiPath}/${this.bookingUrlText}`,
       bookingRequest,
@@ -76,7 +76,7 @@ export class BookingService {
 
   reject(bookingId: string){
     let promise = firstValueFrom(this.http.put<number>(
-      `https://localhost:7271/api/BookingRequest/${bookingId}/${2}`, //enum for rejected is '2'
+      `https://localhost:7271/api/BookingRequest/reject/${bookingId}`,
       {},
       this.getHeaderWithToken()
     ))

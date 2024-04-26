@@ -89,7 +89,7 @@ export class HotelDetailPageComponent {
     if(!this.isLoggedIn){
       this.router.navigate(['/login']);
     }
-    console.log(this.authService.getUser())
+    // console.log(this.authService.getUser())
     const today = new Date()
     today.setHours(0, 0, 0, 0)
     if(this.checkInDate < today){
@@ -101,8 +101,7 @@ export class HotelDetailPageComponent {
       return;
     }
     this.isLoading = true;
-    const bookingRequest: BookingRequest = {
-      id: '',
+    const bookingRequest = {
       checkInDate: this.checkInDate,
       checkOutDate: this.checkOutDate,
       totalRent: this.hotel.rentPerDay * (this.differenceInDays(this.checkInDate, this.checkOutDate) + 1),
@@ -110,7 +109,6 @@ export class HotelDetailPageComponent {
       hotelId: this.hotel.id,
       userId: this.authService.getUser().id
     }
-console.log(this.hotel)
     console.log(bookingRequest);
     const rowsAffected:number = await this.bookingService.createBooking(bookingRequest)
     if(rowsAffected === 1){
